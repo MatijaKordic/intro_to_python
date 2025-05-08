@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Welcome to this repository! This repository is designed to help [Wife's Name] learn Python programming, with a focus on test-driven development (TDD). It contains a series of exercises and projects that gradually increase in difficulty, covering fundamental Python concepts and basic AI/ML.
+Welcome to this repository! This repository is designed to help you learn Python programming, with a focus on test-driven development (TDD). It contains a series of exercises and projects that gradually increase in difficulty, covering fundamental Python concepts and basic AI/ML.
 
 The goal is to provide a structured and practical learning experience, enabling her to write clean, well-tested, and maintainable code.
 
@@ -46,39 +46,25 @@ The goal is to provide a structured and practical learning experience, enabling 
 
         (Replace `your-username` and `your-repository-name` with the correct values. This command copies the repository to your computer, and the `cd` command changes the current directory to the repository folder.)
 
-    * It's highly recommended to use a virtual environment to manage Python dependencies. This keeps the project's dependencies isolated from other Python projects.  We'll use `uv` for this. If you haven't already, install `uv`:
+    * It's highly recommended to use a virtual environment to manage Python dependencies. This keeps the project's dependencies isolated from other Python projects.  We'll use `uv` for this. 
         
         \`\`\`bash
-        pip install uv
-        \`\`\`
-
-        Then, create a virtual environment:
-
-        \`\`\`bash
-        python3 -m venv .venv  # creates a .venv directory
+        make install
         \`\`\`
     
     * Activate the virtual environment:
         * On macOS and Linux:
         
             \`\`\`bash
-            source .venv/bin/activate
+            source .intro_venv/bin/activate
             \`\`\`
         * On Windows:
         
             \`\`\`bash
-            .venv\\Scripts\\activate
+            .intro_venv\\Scripts\\activate
             \`\`\`
             
         (When the virtual environment is activated, your terminal prompt will change, showing the environment name, e.g., `(.venv) $`.)
-
-    * Install pytest (for running the tests):
-
-        \`\`\`bash
-        pip install pytest
-        \`\`\`
-
-        (This installs the pytest package within the activated virtual environment. `pip` is the package installer for Python.)
 
     * **Set up VSCode:**
         * Open the repository folder in VSCode.
