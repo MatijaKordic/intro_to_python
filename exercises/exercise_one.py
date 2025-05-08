@@ -14,6 +14,7 @@
 # - Test with a name containing numbers or special characters (how
 #   should the function handle it based on the description?).
 
+
 def greet(name: str) -> str:
     # Your code here
     pass

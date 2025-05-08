@@ -14,6 +14,7 @@
 # - Test with two negative integers.
 # - Test with zero.
 
+
 def add_numbers(num1: int, num2: int) -> int:
     # Your code here
     pass

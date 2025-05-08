@@ -15,6 +15,7 @@
 # - Test when the numbers are equal.
 # - Test with negative numbers.
 
+
 def find_max(num1: int, num2: int) -> int:
     # Your code here
     pass

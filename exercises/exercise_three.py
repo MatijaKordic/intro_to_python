@@ -16,9 +16,10 @@
 # - Test with a negative even number.
 # - Test with a negative odd number.
 
+
 def is_even(number: int) -> bool:
     """Check if a number is even.
-    
+
     Args:
         number: The number to check.
 

@@ -15,6 +15,7 @@
 # - Test with a single character string.
 # - Test with a string containing spaces.
 
+
 def reverse_string(string: str) -> str:
     # Your code here
     pass
