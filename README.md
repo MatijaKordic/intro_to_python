@@ -7,7 +7,7 @@ Welcome to this repository! This repository is designed to help you learn Python
 The goal is to provide a structured and practical learning experience, enabling her to write clean, well-tested, and maintainable code.
 
 ## Goals
-
+github
 * Provide a structured learning path for Python.
 * Introduce test-driven development (TDD) from the beginning.
 * Build a portfolio of Python code.
@@ -167,3 +167,13 @@ Please follow the [Code of Conduct](CODE_OF_CONDUCT.md) in all interactions with
 ## License
 
 This project is licensed under the [License Name] License. See the [LICENSE](LICENSE) file for more information.
+
+
+## Most common bash commands to use in terminal
+
+`pwd` -- This command logs the current directory I am located in the terminal. 
+`cd` -- This command allows you to go from one to another directory. To go back type `cd ..`, you can also chain that with adding backslashes and doing `cd ../../..` to go several backwards. Also, you can use `tab` for auto completion of folder names.
+`ls -a` -- Command that lists all folders and files in a directory.
+`mkdir` -- Create a directory.
+`touch` -- Create a file. 
+`rm` -- Remove a file. Add `-r` for recursive when deleting a folder. Be careful, the files don't go to Recycle bin.
