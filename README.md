@@ -7,7 +7,7 @@ Welcome to this repository! This repository is designed to help you learn Python
 The goal is to provide a structured and practical learning experience, enabling her to write clean, well-tested, and maintainable code.
 
 ## Goals
-github
+
 * Provide a structured learning path for Python.
 * Introduce test-driven development (TDD) from the beginning.
 * Build a portfolio of Python code.
