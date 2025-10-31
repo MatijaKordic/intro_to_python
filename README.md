@@ -177,3 +177,156 @@ This project is licensed under the [License Name] License. See the [LICENSE](LIC
 `mkdir` -- Create a directory.
 `touch` -- Create a file. 
 `rm` -- Remove a file. Add `-r` for recursive when deleting a folder. Be careful, the files don't go to Recycle bin.
+
+
+## Working with Github
+
+Minor things to keep on mind:
+
+- We want to have small PRs that are targeting one addition (be it a feature, fix, etc.)
+- You can have multiple PRs and branches running at the same time.
+- Github is a version control tool, which means it literally stores all of the different versions of the repository through history. You could jump back to any point in repo history using commit hashes. This is why Semantic Versioning (SemVer) and Conventional Changelog (CC) help.
+
+When you want to contribute to a Github Repository, first you need to fetch and pull the latest main branch and checkout to your new branch from there. Once the development of the code has been implemented and tested, you will add a commit using Commitizen and push to Github for a PR (pull request). There, you will have to have at least one reviewer. Once the PR has been approved, you will fetch the latest of your branch. Push these and merge your branch. In code:
+
+```python
+git fetch —-all
+```
+
+We are fetching to make sure tags and other branches are fetched too. Just good practice. Now run pull:
+
+```python
+git pull
+```
+
+Okay, so not is the time to checkout to your branch and apply your changes. Remember, we are working according to Semantic Versioning and using a Conventional Changelog that follows following commit categories:
+
+- build: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
+- ci: Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)
+- docs: Documentation only changes
+- feat: A new feature
+- fix: A bug fix
+- perf: A code change that improves performance
+- refactor: A code change that neither fixes a bug nor adds a feature
+- style: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+- test: Adding missing tests or correcting existing tests
+
+Now, Semantic Versioning (SemVer), it says we track in our Github versioning only the following three: feat, fix, and major corresponding to 0.0.0 where first digit is major and represents a breaking change (moving repo from research to production), second digit is minor (in conventional changelog (CC) it is feat or short of feature) and represents adding a new feature and last digit is patch (in CC fix) and represents fixing a bug in code. 
+
+So, upfront you should know what you are solving with your branch and name your new branch accordingly with type_of_change/branch_name e.g. if you are adding a new feature for Azure Blog storage: feat/azure_connector like this:
+
+```python
+git checkout -b feat/azure_connector
+```
+
+The -b bit will automatically create and transfer you to the branch so you can start developing. Once you develop, run:
+
+```python
+git status
+```
+
+Now, you can see which files were changed, add the ones you want to commit with:
+
+```python
+git add file_name
+```
+
+Now, if you added all of your files, run:
+
+```python
+git commit -m "Descriptive and concise message."
+```
+
+Once the commit has passed, we run:
+
+```python
+git push
+```
+
+It will ask us to set the upstream branch (because our branch is still local) and just copy paste the code from the terminal for that. 
+
+Once it is pushed, you can open a PR directly from terminal (you will be given a link there) or go to Github repo and open a PR there. Add a reviewer and wait for approval or required changes. Once the PR has been finally approved, pull the latest branch to your local. **Note: do not merge the pull request yet!** 
+
+```python
+git pull
+```
+
+Once the PR has been approved, we need to pull the changes (if any) and before merging on Github we will bump the version locally. Once bump is done, make sure to push the bumped changes to Github prior to merging the branch. 
+
+```python
+git checkout main/dev
+git fetch --all
+git pull
+git checkout your_branch
+git merge main/dev
+```
+
+The above git merge main will have you enter VIM to add a commit message on why the merge was done. VIM is an editing in-terminal tool. It has a specific set of commands:
+
+- ENTER will allow you to start adding your commit message
+- Add your commit message e.g.: Merge main to your_branch to make sure Commitizen is up to date before doing cz bump
+- ESCAPE will get you out of the commit message
+- Now, in order to save and exit VIM, do :wq
+
+In case our change has been a feature, bug fix or major, the bump will bump the [CHANGELOG.md](http://CHANGELOG.md) and populate it with our commit message, and change the .cz.yaml and VERSION files accordingly. Do 
+
+```python
+git status
+git push
+```
+
+Now, on Github just do the merge of the branch. On your local machine, make sure to switch to main and do the fetch and pull to make sure you are up to date. 
+
+Don’t forget, minor changes per branch, you can have multiple branches at the same time. 
+
+### Github Stash
+
+Let’s imagine a situation where you have been working on some files on branch feat/add_this_feature but you are still unsure and don’t want to commit the files. Now, in case of new files, you can freely change the branch without having to worry about losing the work but in case of changing existing files, if you say want to jump to a branch fix/change_this_file you will have to either commit the files on feat/add_this_feature and switch to fix/change_this_file or you can use a git stash. A git stash command will stash the current version of the uncommitted changes you made on feat/add_this_feature and you will be able to jump back to fix/change_this_file do your coding and jump back to feat/add_this_feature and do git stash pop to get your stash back for working on it. 
+
+### Github History Fix — Squashing
+
+Developing on a branch is not always predictable so commits often mix and we want to have a commit per file. So, once you are done and the PR is approved, you can check the number of commits in your PR, for example it is 12. You can enter interactive rebasing and squash the commits. This means you can now instead of having numerous commits nicely present them file per file or fix/feat by fix/feat. 
+
+To get the number of commits that differ from the branch you based from and the branch you are on: 
+
+`git rebase -i origin/branch_base`   
+
+This will rebase you to your branch_base so you can do squash and pick.
+
+When rebasing, you have two options, mark the commits you don’t want as `s` for squash or `pick` for what goes to Github. Once done, do:
+
+- esc
+- :wq
+- :wq (sometimes it will need to be done twice)
+
+`git push origin my_branch --force`
+
+That is it, this way you can organise your commits nicely. 
+
+In case you squashed the wrong commits, you can always go back:
+
+1. Make a recovery branch (just in case)
+
+`git checkout -b recovery` 
+
+1. Checkout back:
+
+`git checkout my_branch` 
+
+1. Find commit
+
+`git reflog`
+
+`git reset --hard commit_hash` 
+
+`git rebase -i origin/branch_base`  
+
+`git push origin my_branch --force`
+
+### Adding files/dirs to .gitignore
+
+When working with data/code within your repo, there will be, from time to time, certain files or whole directories that you would like to avoid being accidentally staged and committed to the repo (the dreaded `git add .`). In order to avoid this, you can always modify the `.gitignore` and add any file/directory to it, which will tell git that it should ignore this file and stop tracking it.
+
+In case you have a file, you can just open the `.gitignore` and write: `foo.py` , if this file is in the root of the repo. If it is nested inside of other dirs, you will have to write the relative path from the root to that file: `foo/bar/baz.py`. In case that there is a whole directory that you’d like to be ignored, if it is in the root, you can just do: `foo/`, which will tell git to stop tracking that dir all together (same approach if the dir is nested should be followed as for the file).
+
+Keep in my that `.gitignore` file is being tracked by git and that it is part of the git history, so if any changes are made and the file is saved, be mindful when staging and committing files. In general, `.gitignore` should be modified in such a way that it should “benefit” every single developer, not just a single person making changes in their repo. For example, if it is agreed that `data/` folder will be ignored, this should be true for everyone.
